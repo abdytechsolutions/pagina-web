@@ -1,0 +1,60 @@
+<section id="contacto" class="section section-alt">
+    <div class="container">
+      <h2 class="title">Contacto</h2>
+      <p class="subtitle">Cuéntanos tu necesidad y te respondemos hoy.</p>
+
+      <div class="contact">
+        <form class="form" action="https://formspree.io/f/tu-id" method="POST">
+          <label>Nombre
+            <input required name="nombre" type="text" placeholder="Tu nombre">
+          </label>
+          <label>Correo
+            <input required name="correo" type="email" placeholder="tucorreo@dominio.com">
+          </label>
+          <label>Mensaje
+            <textarea required name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+          </label>
+          <button class="btn" type="submit">Enviar</button>
+        </form>
+
+        <div class="contact-info">
+          <ul>
+            <li>📍 Lima, Perú</li>
+            <li>📱 <a href="tel:+51XXXXXXXXX">+51 XXXXXXXXX</a></li>
+            <li>✉️ <a href="mailto:soporte@abdytech.com">soporte@abdytech.com</a></li>
+            <li>🕒 Lun–Sáb: 9:00–19:00</li>
+          </ul>
+          <a class="btn btn-outline" target="_blank" rel="noopener" href="https://wa.me/51TU_NUMERO?text=Hola%20ABDYTECH%20necesito%20una%20cotizaci%C3%B3n">Hablar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Botón flotante WhatsApp -->
+  <a class="whats-float" target="_blank" rel="noopener" href="https://wa.me/51TU_NUMERO?text=Hola%20ABDYTECH">
+    <span class="whats-dot"></span> WhatsApp
+  </a>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 ABDYTECH SOLUTIONS — Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <script>
+    // Toggle del menú móvil
+    const btn = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('menu');
+    btn?.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('open');
+    });
+
+    // Resaltar link activo por hash
+    const links = [...document.querySelectorAll('.menu a')];
+    const setActive = () => links.forEach(a => a.classList.toggle('is-active', a.hash === location.hash));
+    window.addEventListener('hashchange', setActive); setActive();
+  </script>
+</body>
+</html>

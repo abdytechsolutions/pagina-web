@@ -1,0 +1,358 @@
+:root{
+  --brand:#00c2c7; --brand-2:#007a7e; --bg:#0f1220; --text:#e9ecf8;
+  --muted:#b3bdd3; --accent:#ffd166; --card:#12182a;
+  --border:rgba(255,255,255,.08); --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,Segoe UI,Arial,sans-serif; line-height:1.6}
+.container{width:min(1200px,92%); margin:auto}
+.section{padding:72px 0} .section-alt{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0))}
+[id]{scroll-margin-top:90px}
+
+/* Header */
+.header{position:sticky; top:0; z-index:50; background:rgba(15,18,32,.92); backdrop-filter:saturate(160%) blur(6px); border-bottom:1px solid var(--border)}
+.nav{display:flex; align-items:center; justify-content:space-between; gap:16px; height:74px}
+.brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
+.brand-logo-img{height:44px; width:auto; border-radius:8px}
+.menu ul{display:flex; list-style:none; gap:22px; padding:0; margin:0}
+.menu a{color:var(--text); opacity:.85; text-decoration:none; font-weight:600; padding:10px 6px; border-radius:8px; transition:.2s}
+.menu a:hover,.menu a.is-active{color:var(--accent); opacity:1}
+.nav-toggle{display:none; background:none; border:0; width:40px; height:40px; border-radius:8px}
+.nav-toggle-bar{display:block; height:3px; background:var(--text); margin:6px 0; border-radius:6px}
+
+/* Hero */
+.hero__grid{display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center}
+.hero h1{margin:0 0 14px; line-height:1.12; letter-spacing:.2px; font-size:clamp(32px,4.3vw,56px)}
+.hero p{color:var(--muted); margin:0 0 26px; max-width:62ch}
+.btn{display:inline-block; text-decoration:none; font-weight:800; color:#062221; background:linear-gradient(135deg,var(--brand),var(--brand-2)); padding:12px 18px; border-radius:12px; box-shadow:var(--shadow); transition:.18s}
+.btn:hover{transform:translateY(-2px); filter:brightness(1.05)}
+.btn-sm{padding:10px 16px; border-radius:10px}
+.btn-outline{background:transparent; color:var(--text); border:2px solid var(--brand)}
+.btn-outline:hover{background:rgba(0,194,199,.12)}
+
+
+
+/* Servicios */
+.grid-cards{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
+.card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; box-shadow:var(--shadow)}
+.card .icon{font-size:28px; margin-bottom:8px}
+.title{font-size:clamp(26px,3.2vw,40px); margin:0 0 8px}
+.subtitle{color:var(--muted); margin:0 0 28px}
+
+/* Precios */
+.grid-pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+.price{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px; position:relative}
+.price .amount{font-size:28px; font-weight:800; margin:4px 0 12px; color:var(--accent)}
+.price ul{padding-left:18px; margin:0 0 16px} .price li{margin:6px 0}
+.price .badge{position:absolute; top:14px; right:14px; background:var(--accent); color:#2b2100; padding:6px 10px; font-weight:800; border-radius:999px; font-size:12px}
+.price.featured{outline:2px solid var(--brand); transform:translateY(-2px)}
+
+/* Nosotros */
+.about{display:grid; grid-template-columns:1.2fr .8fr; gap:22px; align-items:start}
+.about-card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; box-shadow:var(--shadow)}
+.bullets{padding-left:18px; margin:10px 0 0} .bullets li{margin:6px 0}
+
+/* Contacto */
+.contact{display:grid; grid-template-columns:1.1fr .9fr; gap:22px}
+.form{display:grid; gap:12px}
+.form input,.form textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0c1324; color:var(--text)}
+.form input::placeholder,.form textarea::placeholder{color:#8fa0b6}
+.contact-info ul{list-style:none; padding:0; margin:0 0 16px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border); padding:22px 0; color:var(--muted); text-align:center}
+
+/* Responsive */
+@media (max-width:1100px){
+  .grid-cards{grid-template-columns:repeat(2,1fr)}
+  .grid-pricing{grid-template-columns:repeat(2,1fr)}
+  .about,.contact{grid-template-columns:1fr}
+}
+@media (max-width:920px){
+  .hero__grid{grid-template-columns:1fr; gap:28px}
+  .hero-figure{max-width:420px}
+}
+@media (max-width:720px){
+  .menu{position:fixed; inset:74px 0 auto 0; background:rgba(15,18,32,.98); transform:translateY(-110%); transition:.25s; border-bottom:1px solid var(--border)}
+  .menu.open{transform:translateY(0)} .menu ul{flex-direction:column; gap:8px; padding:12px}
+  .nav-toggle{display:block}
+}
+@media (max-width:460px){
+  .brand-logo-img{height:38px} .btn{padding:12px 16px; border-radius:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto} .btn,.menu a{transition:none}
+}
+
+
+/* ====== Ajustes MOBILE (<= 720px) ====== */
+@media (max-width: 720px){
+  /* 1) Hero en una sola columna */
+  .hero__grid{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  /* 2) Título y texto más compactos */
+  .hero h1{
+    font-size: clamp(24px, 7vw, 36px);  /* antes muy grande */
+    line-height: 1.2;
+    letter-spacing: .2px;
+  }
+  .hero p{
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  /* 3) Imagen circular: tamaño seguro en móvil */
+  .hero-figure{
+    order: -1;                    /* la imagen arriba del texto (opcional) */
+    max-width: min(85vw, 380px);  /* limita ancho en pantalla chica */
+    margin: 8px auto 0;           /* centrada */
+  }
+  .hero-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;            /* recorte limpio */
+  }
+  /* Aro/halo más sutil para que no “empuje” */
+  .hero-figure::before{
+    inset: -12px;                 /* antes -20/-28px */
+    border-width: 2px;
+  }
+
+  /* 4) Botón cómodo en móvil */
+  .btn{
+    width: 100%;
+    text-align: center;
+    padding: 14px 18px;
+  }
+}
+
+/* ====== Ajuste extra para pantallas MUY pequeñas (<= 360px) ====== */
+@media (max-width: 360px){
+  .hero-figure{ max-width: 320px; }
+  .hero h1{ font-size: clamp(22px, 6.5vw, 32px); }
+}
+
+:root{
+  --brand:#00c2c7; --brand-2:#007a7e; --bg:#0f1220; --text:#e9ecf8;
+  --muted:#b3bdd3; --accent:#ffd166; --card:#12182a;
+  --border:rgba(255,255,255,.08); --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,Segoe UI,Arial,sans-serif; line-height:1.6}
+.container{width:min(1200px,92%); margin:auto}
+.section{padding:72px 0} .section-alt{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0))}
+[id]{scroll-margin-top:90px}
+
+/* Header */
+.header{position:sticky; top:0; z-index:50; background:rgba(15,18,32,.92); backdrop-filter:saturate(160%) blur(6px); border-bottom:1px solid var(--border)}
+.nav{display:flex; align-items:center; justify-content:space-between; gap:16px; height:74px}
+.brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
+.brand-logo-img{height:44px; width:auto; border-radius:8px}
+.menu ul{display:flex; list-style:none; gap:22px; padding:0; margin:0}
+.menu a{color:var(--text); opacity:.85; text-decoration:none; font-weight:600; padding:10px 6px; border-radius:8px; transition:.2s}
+.menu a:hover,.menu a.is-active{color:var(--accent); opacity:1}
+.nav-toggle{display:none; background:none; border:0; width:40px; height:40px; border-radius:8px}
+.nav-toggle-bar{display:block; height:3px; background:var(--text); margin:6px 0; border-radius:6px}
+
+/* Hero */
+.hero__grid{display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center}
+.hero h1{margin:0 0 14px; line-height:1.12; letter-spacing:.2px; font-size:clamp(32px,4.3vw,56px)}
+.hero p{color:var(--muted); margin:0 0 26px; max-width:62ch}
+.btn{display:inline-block; text-decoration:none; font-weight:800; color:#062221; background:linear-gradient(135deg,var(--brand),var(--brand-2)); padding:12px 18px; border-radius:12px; box-shadow:var(--shadow); transition:.18s}
+.btn:hover{transform:translateY(-2px); filter:brightness(1.05)}
+.btn-sm{padding:10px 16px; border-radius:10px}
+.btn-outline{background:transparent; color:var(--text); border:2px solid var(--brand)}
+.btn-outline:hover{background:rgba(0,194,199,.12)}
+
+
+
+/* Servicios */
+.grid-cards{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
+.card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; box-shadow:var(--shadow)}
+.card .icon{font-size:28px; margin-bottom:8px}
+.title{font-size:clamp(26px,3.2vw,40px); margin:0 0 8px}
+.subtitle{color:var(--muted); margin:0 0 28px}
+
+/* Precios */
+.grid-pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+.price{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px; position:relative}
+.price .amount{font-size:28px; font-weight:800; margin:4px 0 12px; color:var(--accent)}
+.price ul{padding-left:18px; margin:0 0 16px} .price li{margin:6px 0}
+.price .badge{position:absolute; top:14px; right:14px; background:var(--accent); color:#2b2100; padding:6px 10px; font-weight:800; border-radius:999px; font-size:12px}
+.price.featured{outline:2px solid var(--brand); transform:translateY(-2px)}
+
+/* Nosotros */
+.about{display:grid; grid-template-columns:1.2fr .8fr; gap:22px; align-items:start}
+.about-card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; box-shadow:var(--shadow)}
+.bullets{padding-left:18px; margin:10px 0 0} .bullets li{margin:6px 0}
+
+/* Contacto */
+.contact{display:grid; grid-template-columns:1.1fr .9fr; gap:22px}
+.form{display:grid; gap:12px}
+.form input,.form textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0c1324; color:var(--text)}
+.form input::placeholder,.form textarea::placeholder{color:#8fa0b6}
+.contact-info ul{list-style:none; padding:0; margin:0 0 16px}
+
+/* Footer */
+.footer{border-top:1px solid var(--border); padding:22px 0; color:var(--muted); text-align:center}
+
+/* Responsive */
+@media (max-width:1100px){
+  .grid-cards{grid-template-columns:repeat(2,1fr)}
+  .grid-pricing{grid-template-columns:repeat(2,1fr)}
+  .about,.contact{grid-template-columns:1fr}
+}
+@media (max-width:920px){
+  .hero__grid{grid-template-columns:1fr; gap:28px}
+  .hero-figure{max-width:420px}
+}
+@media (max-width:720px){
+  .menu{position:fixed; inset:74px 0 auto 0; background:rgba(15,18,32,.98); transform:translateY(-110%); transition:.25s; border-bottom:1px solid var(--border)}
+  .menu.open{transform:translateY(0)} .menu ul{flex-direction:column; gap:8px; padding:12px}
+  .nav-toggle{display:block}
+}
+@media (max-width:460px){
+  .brand-logo-img{height:38px} .btn{padding:12px 16px; border-radius:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto} .btn,.menu a{transition:none}
+}
+
+
+/* ====== Ajustes MOBILE (<= 720px) ====== */
+@media (max-width: 720px){
+  /* 1) Hero en una sola columna */
+  .hero__grid{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  /* 2) Título y texto más compactos */
+  .hero h1{
+    font-size: clamp(24px, 7vw, 36px);  /* antes muy grande */
+    line-height: 1.2;
+    letter-spacing: .2px;
+  }
+  .hero p{
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  /* 3) Imagen circular: tamaño seguro en móvil */
+  .hero-figure{
+    order: -1;                    /* la imagen arriba del texto (opcional) */
+    max-width: min(85vw, 380px);  /* limita ancho en pantalla chica */
+    margin: 8px auto 0;           /* centrada */
+  }
+  .hero-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;            /* recorte limpio */
+  }
+  /* Aro/halo más sutil para que no “empuje” */
+  .hero-figure::before{
+    inset: -12px;                 /* antes -20/-28px */
+    border-width: 2px;
+  }
+
+  /* 4) Botón cómodo en móvil */
+  .btn{
+    width: 100%;
+    text-align: center;
+    padding: 14px 18px;
+  }
+}
+
+/* ====== Ajuste extra para pantallas MUY pequeñas (<= 360px) ====== */
+@media (max-width: 360px){
+  .hero-figure{ max-width: 320px; }
+  .hero h1{ font-size: clamp(22px, 6.5vw, 32px); }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* ajusta al alto de tu header */
+}
+
+/* 🔽 Evita que el header tape las secciones */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* Ajusta el valor según la altura real del header */
+}
+
+/* 🔽 Extra: si quieres un ajuste por sección */
+section {
+  scroll-margin-top: 90px; /* Igual que scroll-padding-top */
+}
+
+/* Ajuste global para todos los anclajes */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px; /* altura aproximada de tu header */
+}
+
+/* También asegura que cada sección respete ese margen */
+section {
+  scroll-margin-top: 50px; /* mismo valor */
+}
+
+:root{
+  --header-desktop: 90px;
+  --header-mobile: 140px; /* súbelo a 150–160 si aún tapa algo */
+}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top: var(--header-desktop);
+}
+[id]{scroll-margin-top: var(--header-desktop);}
+
+@media (max-width: 768px){
+  html{scroll-padding-top: var(--header-mobile);}
+  [id]{scroll-margin-top: var(--header-mobile);}
+}
+
+.card-img {
+  width: 100%;
+  height: 160px;           /* Ajusta la altura */
+  object-fit: cover;       /* Recorta la foto si es muy grande */
+  border-radius: 12px;     /* Bordes redondeados como las tarjetas */
+  margin-top: 12px;        /* Separación respecto al texto */
+}
+
+/* --- Servicios: imagen responsiva con altura uniforme --- */
+.card{
+  display: flex;
+  flex-direction: column;
+}
+
+.card-media{
+  margin-top: 14px;
+  border-radius: 12px;
+  overflow: hidden;            /* recorta esquinas y exceso de la imagen */
+  aspect-ratio: 16 / 9;        /* todas del mismo alto relativo */
+  background: #0c1324;         /* color mientras carga */
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+}
+
+.card-media img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;           /* llena el cuadro sin deformarse */
+}
+
+/* Grid más sólido en distintos anchos */
+.grid-cards{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 1100px){
+  .grid-cards{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px){
+  .grid-cards{ grid-template-columns: 1fr; }
+  .card-media{ aspect-ratio: 16 / 10; } /* un poco más alta en móvil (opcional) */
+}
