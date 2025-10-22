@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Acceso restringido</title>
 <style>
   body{background:#0b1221;color:#fff;font-family:Arial,sans-serif;text-align:center;padding-top:100px}
@@ -12,42 +12,128 @@
   .soporte{margin-top:60px;font-size:14px}
   .soporte a{color:#03bafc;text-decoration:none;font-weight:bold}
   .soporte a:hover{color:#02e1ff;text-decoration:underline}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .hint{font-size:12px;color:#a5b4fc;margin-top:8px;height:16px}
+  .row{margin-top:8px;font-size:13px}
+  .disabled{opacity:.7;cursor:not-allowed}
 </style>
 <script>
-function acceder(password) {
-  if (password === "Dlink.760915$") {
-    window.location.href = "descargas.html";
-  } else {
-    alert("❌ Contraseña incorrecta. Intenta de nuevo.");
+(function(){
+  // Si ya está autenticado en esta pestaña, manda directo
+  if (sessionStorage.getItem("abdAuth") === "ok") {
+    location.replace("descargas.html");
   }
-}
 
-window.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('accesoForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault(); // evita recargar la página
-    const pwd = form.password.value.trim();
-    if (!pwd) return;
-    acceder(pwd);
+  const PASS = "Dlink.760915$"; // visible en cliente (parche, no seguridad total)
+  const MAX_INTENTOS = 5;
+  const COOLDOWN_MS = 60_000; // 1 minuto
+
+  function bloquearSiCooldown() {
+    const hasta = +localStorage.getItem("abdCooldownHasta") || 0;
+    const now = Date.now();
+    if (now < hasta) {
+      const segundos = Math.ceil((hasta - now)/1000);
+      return segundos; // aún en cooldown
+    }
+    return 0;
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('accesoForm');
+    const input = document.getElementById('clave');
+    const btn = document.getElementById('btnAcceder');
+    const caps = document.getElementById('capsHint');
+    const intentosEl = document.getElementById('intentosHint');
+    const verChk = document.getElementById('verClave');
+
+    // Estado de intentos
+    let intentos = +(sessionStorage.getItem("abdIntentos") || 0);
+    function renderIntentos() {
+      intentosEl.textContent = intentos ? `Intentos fallidos: ${intentos}/${MAX_INTENTOS}` : '';
+    }
+    renderIntentos();
+
+    // Cooldown si aplica
+    const espera = bloquearSiCooldown();
+    if (espera) {
+      btn.classList.add('disabled');
+      btn.disabled = true;
+      btn.textContent = `Espera ${espera}s…`;
+      const timer = setInterval(() => {
+        const s = bloquearSiCooldown();
+        if (!s) {
+          clearInterval(timer);
+          btn.disabled = false;
+          btn.classList.remove('disabled');
+          btn.textContent = 'Ingresar';
+        } else {
+          btn.textContent = `Espera ${s}s…`;
+        }
+      }, 1000);
+    }
+
+    // Mostrar/ocultar contraseña
+    verChk.addEventListener('change', () => {
+      input.type = verChk.checked ? 'text' : 'password';
+    });
+
+    // Aviso CapsLock
+    input.addEventListener('keyup', (e) => {
+      try {
+        const on = e.getModifierState && e.getModifierState('CapsLock');
+        caps.textContent = on ? '⚠️ CapsLock activado' : '';
+      } catch {}
+    });
+
+    function acceder(password) {
+      if (password === PASS) {
+        sessionStorage.setItem("abdAuth", "ok");
+        // (Opcional) caducar en 2 horas:
+        setTimeout(()=>sessionStorage.removeItem("abdAuth"), 2 * 60 * 60 * 1000);
+        location.href = "descargas.html";
+      } else {
+        intentos++;
+        sessionStorage.setItem("abdIntentos", intentos);
+        renderIntentos();
+        if (intentos >= MAX_INTENTOS) {
+          localStorage.setItem("abdCooldownHasta", Date.now() + COOLDOWN_MS);
+          alert("Demasiados intentos. Espera 1 minuto e inténtalo de nuevo.");
+          location.reload();
+          return;
+        }
+        alert("❌ Contraseña incorrecta. Intenta de nuevo.");
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (btn.disabled) return;
+      const pwd = input.value.trim();
+      if (!pwd) return;
+      acceder(pwd);
+    });
   });
-});
+})();
 </script>
 </head>
 <body>
-  <img src="img/logo.png" alt="Abdytech Solutions" width="120" style="border-radius:12px; box-shadow:0px 5px 20px rgba(0,0,0,0.4); margin-bottom:20px;">
+  <img src="img/logo.png" alt="Abdytech Solutions" width="120" style="border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,.4); margin-bottom:20px;">
   <h2>🔒 Área de acceso restringido</h2>
   <p>Ingrese la contraseña para acceder a las descargas de WINDOWS, OFFICE y UTILITARIOS</p>
 
-  <!-- Al presionar Enter dentro del input, se envía el form -->
   <form id="accesoForm" autocomplete="off">
     <label for="clave" class="sr-only">Contraseña</label>
-    <input type="password" id="clave" name="password" placeholder="Contraseña" autocomplete="current-password" autofocus>
-    <br>
-    <button type="submit">Ingresar</button>
+    <input type="password" id="clave" name="password" placeholder="Contraseña" autocomplete="current-password" autofocus minlength="4" required>
+    <div class="row">
+      <label><input type="checkbox" id="verClave"> Mostrar contraseña</label>
+    </div>
+    <div id="capsHint" class="hint"></div>
+    <div id="intentosHint" class="hint"></div>
+    <button id="btnAcceder" type="submit">Ingresar</button>
   </form>
 
   <div class="soporte">
-    <p><a href="https://wa.me/51937893619?text=Hola,%20necesito%20acceso%20a%20tus%20descargas%20de%20office,windows%20y%20utilitarios." target="_blank">Solicitar Acceso</a></p>
+    <p><a href="https://wa.me/51937893619?text=Hola,%20necesito%20acceso%20a%20tus%20descargas%20de%20office,windows%20y%20utilitarios." target="_blank" rel="noopener noreferrer">Solicitar Acceso</a></p>
   </div>
 </body>
 </html>

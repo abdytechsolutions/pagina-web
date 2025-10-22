@@ -1,12 +1,23 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Descargas - Abdytech Solutions</title>
-  <link rel="stylesheet" href="styles.css"> <!-- tu CSS global -->
+
+  <!-- Protección: bloquear acceso directo si no pasó por acceso.html -->
+  <script>
+    if (sessionStorage.getItem("abdAuth") !== "ok") {
+      window.location.replace("index.html"); // o acceso.html
+    }
+  </script>
+
+  <!-- Si JS está desactivado, regresamos a la página de acceso -->
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=index.html" />
+  </noscript>
+
+  <link rel="stylesheet" href="styles.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -48,6 +59,9 @@
     .downloads a:hover {
       background: #0891b2;
     }
+    .logout {
+      margin: 12px 0 0;
+    }
     footer {
       margin-top: 50px;
       font-size: 0.9em;
@@ -67,38 +81,53 @@
       font-weight: bold;
       text-decoration: none;
     }
+    .btn {
+      margin-top: 10px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #334155;
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn:hover { background: #475569; }
   </style>
 </head>
 <body>
-<img src="img/logo.png" alt="Abdytech Solutions" width="120" style="border-radius:12px; box-shadow:0px 5px 20px rgba(0,0,0,0.4); margin-bottom:20px;">
+  <img src="img/logo.png" alt="Abdytech Solutions" width="120"
+       style="border-radius:12px; box-shadow:0px 5px 20px rgba(0,0,0,0.4); margin-bottom:20px;" />
+
   <header>
     <h1>Centro de Descargas</h1>
     <p>Herramientas de soporte remoto, utilitarios y diagnóstico</p>
+    <!-- Botón Cerrar sesión DENTRO del body -->
+    <button class="btn logout"
+      onclick="sessionStorage.removeItem('abdAuth'); location.href='index.html'">
+      Cerrar sesión
+    </button>
   </header>
 
   <main>
 
-<!-- Activadores y Office -->
-<h2> ◆ WINDOWS Y OFFICE</h2>
-<div class="downloads">
-  <a href="https://files.rg-adguard.net/version/f0bd8307-d897-ef77-dbd6-216fefbe94c5">💻 Descargar ISO Windows 10,11 y Server</a>
-  <a href="https://mega.nz/folder/W5xhnDYJ#sWWrDDZIa2X4Lhx9obS5Zw">📂 Descargar ISO Windows 10-64 bits update octubre 2025</a>
- <a href="https://mega.nz/file/ShBXTLKJ#TMK-_k6kSkkWd4ggTXDttcUGkM_bv6e7qf5igtwefbY">📂 Descargar ISO Windows 10-32 bits update agosto 2025</a>
-   <a href="https://mega.nz/folder/i1wT1YRD#-WczF3tEHJx8CiLBHT4GIg">📂 Descargar Home Business 2016</a>
-   <a href="https://www.mediafire.com/file/zr9afavls5ox7ds/HomeBusiness2019Retail.7z/file" target="_blank">📂 Descargar Home Business 2019</a>
-   <a href="https://www.mediafire.com/file/ez0ofxvb5q9lj1x/HomeBusiness2021Retail_.7z/file" target="_blank">📂 Descargar Home Business 2021</a>
-  <a href="https://mega.nz/file/BRRTnI6D#HJMHiOuwNFcN31xrSMiC0ulOuri9wKhhf0ZLFQF77ZI">📂 Descargar office 2024 proplus ltsc </a>
-  <a href="https://www.mediafire.com/file/3jftdh91aj0e5hf/activador.7z/file">📂 Descargar Activador office y windows 2025</a>
+    <!-- Activadores y Office -->
+    <h2> ◆ WINDOWS Y OFFICE</h2>
+    <div class="downloads">
+      <a href="https://files.rg-adguard.net/version/f0bd8307-d897-ef77-dbd6-216fefbe94c5">💻 Descargar ISO Windows 10,11 y Server</a>
+      <a href="https://mega.nz/folder/W5xhnDYJ#sWWrDDZIa2X4Lhx9obS5Zw">📂 Descargar ISO Windows 10-64 bits update octubre 2025</a>
+      <a href="https://mega.nz/file/ShBXTLKJ#TMK-_k6kSkkWd4ggTXDttcUGkM_bv6e7qf5igtwefbY">📂 Descargar ISO Windows 10-32 bits update agosto 2025</a>
+      <a href="https://mega.nz/folder/i1wT1YRD#-WczF3tEHJx8CiLBHT4GIg">📂 Descargar Home Business 2016</a>
+      <a href="https://www.mediafire.com/file/zr9afavls5ox7ds/HomeBusiness2019Retail.7z/file" target="_blank" rel="noopener noreferrer">📂 Descargar Home Business 2019</a>
+      <a href="https://www.mediafire.com/file/ez0ofxvb5q9lj1x/HomeBusiness2021Retail_.7z/file" target="_blank" rel="noopener noreferrer">📂 Descargar Home Business 2021</a>
+      <a href="https://mega.nz/file/BRRTnI6D#HJMHiOuwNFcN31xrSMiC0ulOuri9wKhhf0ZLFQF77ZI">📂 Descargar office 2024 proplus ltsc</a>
+      <a href="https://www.mediafire.com/file/3jftdh91aj0e5hf/activador.7z/file" target="_blank" rel="noopener noreferrer">📂 Descargar Activador office y windows 2025</a>
+    </div>
 
-</div>  
-
-   <!-- Utlilitarios-->
+    <!-- Utilitarios -->
     <h2>🔹 Utilitarios</h2>
     <div class="downloads">
-       <a href="https://www.mediafire.com/file/tskufn7ioj9s98b/VueScan.7z/file">📂 Descargar VueScan software de escaneo</a>
-    <a href="https://mega.nz/file/P9RlXIbB#nh1g27SGpeW6Qeor3qIbwicfeURszobhusJ-ZJ4QlDA">📂 Descargar Megadowloader v2</a>
-    <a href="https://mega.nz/file/etZyxJBQ#GX7gesHEoAHaN03RUObh42eis9_n-7WFkN6N7YFxtvA">📂 Descargar Driver Booster 2025 full</a>
-
+      <a href="https://www.mediafire.com/file/tskufn7ioj9s98b/VueScan.7z/file" target="_blank" rel="noopener noreferrer">📂 Descargar VueScan software de escaneo</a>
+      <a href="https://mega.nz/file/P9RlXIbB#nh1g27SGpeW6Qeor3qIbwicfeURszobhusJ-ZJ4QlDA">📂 Descargar Megadowloader v2</a>
+      <a href="https://mega.nz/file/etZyxJBQ#GX7gesHEoAHaN03RUObh42eis9_n-7WFkN6N7YFxtvA">📂 Descargar Driver Booster 2025 full</a>
     </div>
 
     <!-- Acceso remoto -->
@@ -110,20 +139,19 @@
       <a href="https://remotedesktop.google.com/">🌐 Chrome Remote Desktop</a>
     </div>
 
-
     <!-- Diagnóstico y seguridad -->
     <h2>🔹 Diagnóstico y ANTIVIRUS</h2>
     <div class="downloads">
       <a href="https://www.ccleaner.com/speccy">🔍 Speccy (info del sistema)</a>
       <a href="https://crystalmark.info/en/software/crystaldiskinfo/">💽 CrystalDiskInfo</a>
-       <a href="https://www.mediafire.com/file/yapiv4br5tarqgi/kaspersky.7z/file">📂 Descargar antivirus Kaspersky</a>
+      <a href="https://www.mediafire.com/file/yapiv4br5tarqgi/kaspersky.7z/file" target="_blank" rel="noopener noreferrer">📂 Descargar antivirus Kaspersky</a>
       <a href="https://www.malwarebytes.com/mwb-download">🛡 Malwarebytes</a>
     </div>
- <!-- otros -->
-    <h2>🔹 Otros archivos </h2>
+
+    <!-- Otros -->
+    <h2>🔹 Otros archivos</h2>
     <div class="downloads">
-      <a href="https://docs.google.com/spreadsheets/d/1A8au1wYg4wyGuTutqhZfPhqscQvq2DT9/edit?usp=drive_link&ouid=107584343751592580424&rtpof=true&sd=true">📂  ABDYTECH SOLUTIONS.XLSX</a>
-    
+      <a href="https://docs.google.com/spreadsheets/d/1A8au1wYg4wyGuTutqhZfPhqscQvq2DT9/edit?usp=drive_link&ouid=107584343751592580424&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">📂 ABDYTECH SOLUTIONS.XLSX</a>
     </div>
 
     <!-- Sección de ayuda -->
@@ -140,3 +168,4 @@
   </footer>
 </body>
 </html>
+
