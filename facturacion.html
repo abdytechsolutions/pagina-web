@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdytech Solutions - Sistema para Restaurantes</title>
+
+<style>
+    body { 
+        margin: 0; 
+        font-family: Arial, sans-serif; 
+        background: #0c1a33; /* Azul marino */
+        color: white;
+    }
+    header { 
+        text-align: center; 
+        padding: 30px 15px; 
+    }
+    header img {
+        max-width: 80px;
+        margin-bottom: 10px;
+    }
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 30px 15px;
+    }
+    .flex-box {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .box {
+        background: rgba(255,255,255,0.08);
+        border-radius: 8px;
+        padding: 25px;
+        flex: 1;
+        min-width: 250px;
+        backdrop-filter: blur(4px);
+    }
+    .photo-box img {
+        width: 100%;
+        border-radius: 8px;
+    }
+    h1, h2 { color: #ffffff; }
+    ul { line-height: 1.9; }
+    .btn {
+        display: inline-block;
+        background: #0077ff;
+        color: white;
+        padding: 14px 22px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: 0.2s;
+    }
+    .btn:hover { background: #0057cc; }
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #0b162c;
+        font-size: 14px;
+        margin-top: 30px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html"><img src="img\logo.png" alt="Abdytech Solutions" ></a>
+    <h1>Abdytech Solutions</h1>
+    <p>Sistema para Restaurantes + Facturación Electrónica (SUNAT)</p>
+</header>
+
+<div class="container">
+
+    <div class="flex-box">
+        <div class="box">
+            <h2>Funciones Principales</h2>
+            <ul>
+                <li>🍽 Gestor de Mesas y Salones</li>
+                <li>📦 Módulo Delivery</li>
+                <li>🖨 Comandas a Cocina y Barra</li>
+                <li>🧾 Facturación Electrónica con OSE / PSE</li>
+                <li>📊 Reportes, ventas, cierres diarios</li>
+                <li>📱 Funciona en PC, Laptop o Tablet</li>
+            </ul>
+        </div>
+
+        <div class="photo-box" style="flex:1; min-width:250px;">
+            <!-- CAMBIAR ESTA RUTA A LA FOTO QUE DESEES -->
+            <img src="img\restaurant.jpg" alt="Sistema de restaurante con facturación electrónica">
+        </div>
+    </div>
+
+    <div class="box" style="margin-top:30px;">
+        <h2>Planes desde S/ 150 mensual</h2>
+        <p>Incluye instalación + capacitación + soporte.</p>
+        <a class="btn" href="https://wa.me/51937893619?text=Hola,%20quiero%20información%20del%20sistema%20para%20mi%20restaurante">
+            Consultar por WhatsApp
+        </a>
+        <p style="margin-top:10px; font-size:12px;"></p>
+    </div>
+
+</div>
+
+<footer>
+    © 2025 Abdytech Solutions - Sistemas, Software & Facturación Electrónica
+</footer>
+
+</body>
+</html>
+
